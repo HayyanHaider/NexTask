@@ -1,4 +1,4 @@
-# 📝 Task Management System
+# 📝 Task Management System - NexTask
 
 A full-stack **Task Management Web Application** built with **JavaScript / Node.js** that allows users to create, organize, and track tasks with priorities, deadlines, and secure authentication.
 
