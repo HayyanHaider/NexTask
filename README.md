@@ -1,3 +1,5 @@
+
+```markdown
 # 📝 Task Management System - NexTask
 
 A containerized, full-stack **Task Management Web Application** built with **React**, **Node.js / Express**, and **Microsoft SQL Server**. This application allows users to create, organize, and track tasks with priorities, budgets, and secure authentication, all running in a seamless Docker environment.
@@ -6,19 +8,19 @@ A containerized, full-stack **Task Management Web Application** built with **Rea
 
 ## 🚀 Features
 
-* 🐳 **Multi-Container Architecture** — Orchestrated using Docker Compose for effortless local setup.
-* 💾 **Persistent Database** — Powered by MS SQL Server 2022 with a persistent Docker volume, ensuring your data survives container restarts.
-* ⚡ **Automated DB Initialization** — Auto-creates the required databases (`DB_PHASE4`) and sets up seed data out of the box.
-* 🔐 **User Authentication** — Secure login and registration system using JWT (JSON Web Tokens).
-* ✅ **Task & Budget Tracking** — Manage projects, budgets, tasks, and subtasks seamlessly.
-* 🌐 **Modern Web Interface** — Clean, responsive React-based user interface.
+*   🐳 **Multi-Container Architecture** — Orchestrated using Docker Compose for effortless local setup.
+*   💾 **Persistent Database** — Powered by MS SQL Server 2022 with a persistent Docker volume, ensuring your data survives container restarts.
+*   ⚡ **Automated DB Initialization** — Auto-creates the required databases (`DB_PHASE4`) and sets up seed data out of the box.
+*   🔐 **User Authentication** — Secure login and registration system using JWT (JSON Web Tokens).
+*   ✅ **Task & Budget Tracking** — Manage projects, budgets, tasks, and subtasks seamlessly.
+*   🌐 **Modern Web Interface** — Clean, responsive React-based user interface.
 
 ---
 
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
-| --- | --- |
+| :--- | :--- |
 | **Frontend** | React |
 | **Backend** | Node.js / Express.js |
 | **Database** | Microsoft SQL Server (MSSQL 2022) |
@@ -66,7 +68,7 @@ No need to install Node.js, npm, or SQL Server locally!
 #### 1. Clone the repository
 
 ```bash
-git clone https://github.com/HayyanHaider/TASK_MANAGEMENT_SYSTEM.git
+git clone [https://github.com/HayyanHaider/TASK_MANAGEMENT_SYSTEM.git](https://github.com/HayyanHaider/TASK_MANAGEMENT_SYSTEM.git)
 cd TASK_MANAGEMENT_SYSTEM
 
 ```
@@ -77,7 +79,7 @@ Create a `.env` file in the **root directory** of the project:
 
 ```env
 PORT=5000
-DB_PASSWORD=Hayyan@Nextask2026
+DB_PASSWORD=your_secure_database_password
 JWT_SECRET=your_super_secret_jwt_key
 
 ```
@@ -97,7 +99,7 @@ Once the containers are up and running, you can access the services:
 
 * 🌐 **React Frontend:** `http://localhost:3000`
 * ⚡ **Express Backend:** `http://localhost:5000`
-* 🛢️ **MS SQL Server Connection:** `localhost,1433` (User: `SA`, Password: `Your_DB_Password`)
+* 🛢️ **MS SQL Server Connection:** `localhost,1433` (User: `SA`, Password: [Your DB Password configured in .env])
 
 ---
 
@@ -138,5 +140,9 @@ If you ever need to reset the database and completely wipe the persistent volume
 
 ```bash
 docker compose down -v
+
+```
+
+```
 
 ```
