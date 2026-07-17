@@ -1,44 +1,50 @@
 # 📝 Task Management System - NexTask
 
-A full-stack **Task Management Web Application** built with **JavaScript / Node.js** that allows users to create, organize, and track tasks with priorities, deadlines, and secure authentication.
+A containerized, full-stack **Task Management Web Application** built with **React**, **Node.js / Express**, and **Microsoft SQL Server**. This application allows users to create, organize, and track tasks with priorities, budgets, and secure authentication, all running in a seamless Docker environment.
 
 ---
 
 ## 🚀 Features
 
-- 🔐 **User Authentication** — Secure login and registration system
-- ✅ **Task Management** — Create, update, and delete tasks with ease
-- 🏷️ **Priority Levels** — Assign priority levels (Low, Medium, High) to tasks
-- 📅 **Deadlines** — Set and track due dates for each task
-- 💾 **Database Storage** — Persistent data storage across sessions
-- 🌐 **Web Interface** — Clean and responsive web-based UI
+* 🐳 **Multi-Container Architecture** — Orchestrated using Docker Compose for effortless local setup.
+* 💾 **Persistent Database** — Powered by MS SQL Server 2022 with a persistent Docker volume, ensuring your data survives container restarts.
+* ⚡ **Automated DB Initialization** — Auto-creates the required databases (`DB_PHASE4`) and sets up seed data out of the box.
+* 🔐 **User Authentication** — Secure login and registration system using JWT (JSON Web Tokens).
+* ✅ **Task & Budget Tracking** — Manage projects, budgets, tasks, and subtasks seamlessly.
+* 🌐 **Modern Web Interface** — Clean, responsive React-based user interface.
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer      | Technology          |
-|------------|---------------------|
-| Backend    | Node.js / Express.js |
-| Frontend   | HTML, CSS, JavaScript |
-| Database   | MongoDB / MySQL      |
-| Auth       | JWT / Sessions       |
+| Layer | Technology |
+| --- | --- |
+| **Frontend** | React |
+| **Backend** | Node.js / Express.js |
+| **Database** | Microsoft SQL Server (MSSQL 2022) |
+| **Orchestration** | Docker / Docker Compose |
+| **Auth** | JWT (JSON Web Tokens) |
 
 ---
 
 ## 📁 Project Structure
 
-```
+Your repository is split into clean microservices managed by Docker:
+
+```text
 TASK_MANAGEMENT_SYSTEM/
-├── controllers/        # Route handler logic
-├── models/             # Database models/schemas
-├── routes/             # API route definitions
-├── views/              # Frontend templates
-├── public/             # Static assets (CSS, JS, images)
-├── middleware/         # Auth & validation middleware
-├── .env                # Environment variables (not committed)
-├── package.json        # Project dependencies
-└── server.js           # Application entry point
+├── backend/            # Node.js Express Backend
+│   ├── controllers/    # Route handler logic
+│   ├── models/         # MSSQL database schemas/queries
+│   ├── routes/         # API endpoint definitions
+│   └── server.js       # Backend entry point
+├── frontend/           # React Frontend App
+│   ├── src/            # React components, state, and styles
+│   └── package.json    
+├── docker-compose.yml  # Multi-container Docker configuration
+├── .env                # Global environment variables (Do NOT commit)
+└── README.md           # Project documentation
+
 ```
 
 ---
@@ -47,65 +53,90 @@ TASK_MANAGEMENT_SYSTEM/
 
 ### Prerequisites
 
-Make sure you have the following installed:
+To run this application locally, you only need one tool installed on your machine:
 
-- [Node.js](https://nodejs.org/) (v14 or above)
-- [npm](https://www.npmjs.com/)
-- A running instance of your database (MongoDB / MySQL)
+* [Docker Desktop](https://www.docker.com/products/docker-desktop/) (includes Docker Compose)
 
-### Installation
+No need to install Node.js, npm, or SQL Server locally!
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/HayyanHaider/TASK_MANAGEMENT_SYSTEM.git
-   cd TASK_MANAGEMENT_SYSTEM
-   ```
+---
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+### Setup & Installation
 
-3. **Set up environment variables**
+#### 1. Clone the repository
 
-   Create a `.env` file in the root directory:
-   ```env
-   PORT=3000
-   DB_URI=your_database_connection_string
-   JWT_SECRET=your_jwt_secret_key
-   ```
+```bash
+git clone https://github.com/HayyanHaider/TASK_MANAGEMENT_SYSTEM.git
+cd TASK_MANAGEMENT_SYSTEM
 
-4. **Run the application**
-   ```bash
-   npm start
-   ```
+```
 
-5. **Open in browser**
-   ```
-   http://localhost:3000
-   ```
+#### 2. Configure Environment Variables
+
+Create a `.env` file in the **root directory** of the project:
+
+```env
+PORT=5000
+DB_PASSWORD=Hayyan@Nextask2026
+JWT_SECRET=your_super_secret_jwt_key
+
+```
+
+#### 3. Build and Run the Containers
+
+Spin up your entire ecosystem (Database, Initializer, Backend, and Frontend) with a single command:
+
+```bash
+docker compose up -d --build
+
+```
+
+#### 4. Access the Application
+
+Once the containers are up and running, you can access the services:
+
+* 🌐 **React Frontend:** `http://localhost:3000`
+* ⚡ **Express Backend:** `http://localhost:5000`
+* 🛢️ **MS SQL Server Connection:** `localhost,1433` (User: `SA`, Password: `Your_DB_Password`)
 
 ---
 
 ## 📌 API Endpoints
 
-| Method | Endpoint              | Description              | Auth Required |
-|--------|-----------------------|--------------------------|---------------|
-| POST   | `/api/auth/register`  | Register a new user      | ❌            |
-| POST   | `/api/auth/login`     | Login and get token      | ❌            |
-| GET    | `/api/tasks`          | Get all tasks for user   | ✅            |
-| POST   | `/api/tasks`          | Create a new task        | ✅            |
-| PUT    | `/api/tasks/:id`      | Update a task            | ✅            |
-| DELETE | `/api/tasks/:id`      | Delete a task            | ✅            |
+| Method | Endpoint | Description | Auth Required |
+| --- | --- | --- | --- |
+| **POST** | `/api/auth/register` | Register a new user | ❌ |
+| **POST** | `/api/auth/login` | Login and retrieve JWT Token | ❌ |
+| **GET** | `/api/tasks` | Get all tasks for the logged-in user | ✅ |
+| **POST** | `/api/tasks` | Create a new task | ✅ |
+| **PUT** | `/api/tasks/:id` | Update an existing task | ✅ |
+| **DELETE** | `/api/tasks/:id` | Delete a task | ✅ |
 
 ---
 
 ## 🔒 Authentication
 
-This project uses **JWT (JSON Web Tokens)** for secure user authentication. After logging in, a token is issued and must be included in the headers of protected requests:
+This project secures API routes using **JWT**. When making requests to protected endpoints from your frontend or API client, include the token in the headers:
 
-```
-Authorization: Bearer <your_token>
+```http
+Authorization: Bearer <your_jwt_token>
+
 ```
 
 ---
+
+## 🛑 Stopping the App
+
+To shut down the containers while preserving all database records (thanks to the volume configuration):
+
+```bash
+docker compose down
+
+```
+
+If you ever need to reset the database and completely wipe the persistent volume, run:
+
+```bash
+docker compose down -v
+
+```
