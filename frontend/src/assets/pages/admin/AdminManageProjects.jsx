@@ -18,7 +18,7 @@ export default function AdminManageProjects() {
 
   const fetchProjects = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/admin/projects");
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/admin/projects`);
       setProjects(res.data);
     } catch (err) {
       console.error("Error fetching projects:", err);
@@ -42,7 +42,7 @@ export default function AdminManageProjects() {
   const saveUpdate = async (id) => {
     try {
       await axios.put(
-        `http://localhost:3001/admin/projects/${id}`,
+        `${import.meta.env.VITE_API_URL}/admin/projects/${id}`,
         formData,
         { headers: { "Content-Type": "application/json" } }
       );
@@ -58,7 +58,7 @@ export default function AdminManageProjects() {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete project #" + id + "?")) return;
     try {
-      await axios.delete(`http://localhost:3001/admin/projects/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/admin/projects/${id}`);
       setMsg("✅ Project deleted");
       fetchProjects();
     } catch (err) {
@@ -177,3 +177,6 @@ export default function AdminManageProjects() {
     </div>
   );
 }
+
+
+

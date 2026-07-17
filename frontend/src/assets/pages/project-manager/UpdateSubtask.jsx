@@ -20,7 +20,7 @@ const UpdateSubtask = () => {
 
   const fetchSubtaskDetails = async () => {
     try {
-      const res = await axios.get(`http://localhost:3001/pm/subtasks/${subtaskId}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/pm/subtasks/${subtaskId}`);
       setSubtaskData(res.data);
       setLoading(false);
     } catch (err) {
@@ -37,7 +37,7 @@ const UpdateSubtask = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3001/pm/subtasks/${subtaskId}`, subtaskData);
+      await axios.put(`${import.meta.env.VITE_API_URL}/pm/subtasks/${subtaskId}`, subtaskData);
       alert("Subtask updated successfully!");
       navigate(-1); // Go back to the previous page
     } catch (err) {
@@ -84,3 +84,6 @@ const UpdateSubtask = () => {
 };
 
 export default UpdateSubtask;
+
+
+

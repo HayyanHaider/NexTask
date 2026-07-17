@@ -12,7 +12,7 @@ export default function ClientDashboard() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:3001/client/projects", {
+      .get(`${import.meta.env.VITE_API_URL}/client/projects`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(res => {
@@ -79,3 +79,6 @@ export default function ClientDashboard() {
     </div>
   );
 }
+
+
+

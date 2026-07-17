@@ -13,7 +13,7 @@ export default function DeveloperAttachments() {
   const load = () => {
     if (!taskId || isNaN(taskId)) return;
     axios
-      .get(`http://localhost:3001/developer/tasks/${taskId}/attachments`, {
+      .get(`${import.meta.env.VITE_API_URL}/developer/tasks/${taskId}/attachments`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(res => setFiles(res.data))
@@ -27,7 +27,7 @@ export default function DeveloperAttachments() {
     const file = e.target.files[0];
     if (!file) return;
     axios.post(
-      `http://localhost:3001/developer/tasks/${taskId}/attachments`,
+      `${import.meta.env.VITE_API_URL}/developer/tasks/${taskId}/attachments`,
       {
         attachment_name: file.name,
         attachment_type: file.type,
@@ -44,7 +44,7 @@ export default function DeveloperAttachments() {
     if (!window.confirm('Delete this attachment?')) return;
     axios
       .delete(
-        `http://localhost:3001/developer/tasks/${taskId}/attachments/${id}`,
+        `${import.meta.env.VITE_API_URL}/developer/tasks/${taskId}/attachments/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       )
       .then(load)
@@ -105,3 +105,6 @@ export default function DeveloperAttachments() {
     </div>
   );
 }
+
+
+

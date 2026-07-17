@@ -21,7 +21,7 @@ export default function CreateTask() {
       return;
     }
     try {
-      await axios.post(`http://localhost:3001/pm/projects/${projectId}/tasks`, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/pm/projects/${projectId}/tasks`, {
         title,
         description,
         priority,
@@ -123,3 +123,6 @@ export default function CreateTask() {
     </div>
   );
 }
+
+
+

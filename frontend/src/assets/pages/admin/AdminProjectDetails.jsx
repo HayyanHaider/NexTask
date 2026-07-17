@@ -13,7 +13,7 @@ export default function AdminProjectDetails() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/admin/projects/${projectId}/details`)
+      .get(`${import.meta.env.VITE_API_URL}/admin/projects/${projectId}/details`)
       .then(res => {
         setData(res.data);
         setLoading(false);
@@ -109,3 +109,6 @@ export default function AdminProjectDetails() {
     </div>
   );
 }
+
+
+

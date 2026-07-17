@@ -15,7 +15,7 @@ export default function ClientBudget() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     axios.get(
-      `http://localhost:3001/client/projects/${projectId}/budget`,
+      `${import.meta.env.VITE_API_URL}/client/projects/${projectId}/budget`,
       { headers: { Authorization: `Bearer ${token}` } }
     )
     .then(res => {
@@ -59,3 +59,6 @@ function calculateProgress(budget) {
   const progress = (spent / allocated) * 100;
   return Math.min(Math.max(progress, 0), 100); // clamp between 0-100
 }
+
+
+

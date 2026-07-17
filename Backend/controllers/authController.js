@@ -44,7 +44,9 @@ exports.login = async (req, res) => {
 
 // REGISTER Controller
 exports.register = async (req, res) => {
+  // 1. Fallback to a default role_id (e.g., 3 for Developer or 4 for Client) if frontend doesn't send it
   const { username, email, password, role_id } = req.body;
+  const finalRoleId = role_id || 3; // Defaults to 3 (Developer) if not provided
 
   try {
     const pool = await poolPromise;
@@ -67,7 +69,7 @@ exports.register = async (req, res) => {
       .input('username', sql.NVarChar, username)
       .input('email', sql.NVarChar, email)
       .input('password_hash', sql.NVarChar, password) 
-      .input('role_id', sql.Int, role_id)
+      .input('role_id', sql.Int, finalRoleId) // Use the safely defaulted role ID here
       .input('created_at', sql.DateTime, new Date())
       .query(`
         INSERT INTO Users (username, email, password_hash, role_id, created_at)

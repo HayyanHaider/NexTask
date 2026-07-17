@@ -6,7 +6,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './styles/EnhancedTransitions.css';
 
 // Public pages
-import HomePage     from "./assets/pages/Homepage";
+import HomePage     from "./assets/pages/HomePage";
 import LoginPage    from "./assets/pages/LoginPage";
 import RegisterPage from "./assets/pages/RegisterPage";
 
@@ -147,3 +147,6 @@ export default function App() {
     </AuthProvider>
   );
 }
+
+
+

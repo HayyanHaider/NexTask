@@ -12,7 +12,7 @@ export default function DeveloperComments() {
 
   // Load comments from the API
   const loadComments = () => {
-    axios.get(`http://localhost:3001/developer/tasks/${taskId}/comments`, {
+    axios.get(`${import.meta.env.VITE_API_URL}/developer/tasks/${taskId}/comments`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(res => setComments(res.data))
@@ -23,7 +23,7 @@ export default function DeveloperComments() {
   const postComment = () => {
     if (!newComment.trim()) return alert('Comment cannot be empty!');
     axios.post(
-      `http://localhost:3001/developer/tasks/${taskId}/comments`,
+      `${import.meta.env.VITE_API_URL}/developer/tasks/${taskId}/comments`,
       { comment: newComment },
       { headers: { Authorization: `Bearer ${token}` } }
     )
@@ -83,3 +83,6 @@ export default function DeveloperComments() {
     </div>
   );
 }
+
+
+

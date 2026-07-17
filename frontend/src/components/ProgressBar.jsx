@@ -11,3 +11,6 @@ export default function ProgressBar({ percent, label }) {
     </div>
   );
 }
+
+
+

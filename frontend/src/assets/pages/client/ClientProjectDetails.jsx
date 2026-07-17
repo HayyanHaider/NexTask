@@ -19,7 +19,7 @@ const ClientProjectDetails = () => {
   useEffect(() => {
     const fetchProjectDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/client/projects/${projectId}/details`, {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/client/projects/${projectId}/details`, {
         headers: { Authorization: `Bearer ${token}` }
         });
         setProject(response.data.project);
@@ -38,7 +38,7 @@ const ClientProjectDetails = () => {
     e.preventDefault();
     try {
       await axios.post(
-        'http://localhost:3001/client/feedback',
+        `${import.meta.env.VITE_API_URL}/client/feedback`,
         { 
           feedback_text: feedback,
           rating: parseInt(rating),
@@ -145,3 +145,6 @@ const ClientProjectDetails = () => {
 };
 
 export default ClientProjectDetails;
+
+
+

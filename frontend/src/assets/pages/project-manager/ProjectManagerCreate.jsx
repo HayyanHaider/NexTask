@@ -13,7 +13,7 @@ export default function ProjectManagerCreate() {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        "http://localhost:3001/pm/projects",
+        `${import.meta.env.VITE_API_URL}/pm/projects`,
         form,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -65,3 +65,6 @@ export default function ProjectManagerCreate() {
     </div>
   );
 }
+
+
+

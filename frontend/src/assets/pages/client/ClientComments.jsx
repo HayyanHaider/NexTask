@@ -14,7 +14,7 @@ export default function ClientComments() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    axios.get(`http://localhost:3001/client/projects/${projectId}/comments`, {
+    axios.get(`${import.meta.env.VITE_API_URL}/client/projects/${projectId}/comments`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => {
@@ -46,3 +46,6 @@ export default function ClientComments() {
     </div>
   );
 }
+
+
+

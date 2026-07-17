@@ -5,7 +5,7 @@ export default function UsersPage() {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    fetch("http://localhost:3001/Users", {
+    fetch(`${import.meta.env.VITE_API_URL}/Users`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(res => res.json())
@@ -26,3 +26,6 @@ export default function UsersPage() {
     </div>
   );
 }
+
+
+

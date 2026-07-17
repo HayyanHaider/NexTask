@@ -19,7 +19,7 @@ const AdminAddUser = () => {
   const handleAddUser = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3001/admin/users", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser),
@@ -116,3 +116,6 @@ const AdminAddUser = () => {
 };
 
 export default AdminAddUser;
+
+
+

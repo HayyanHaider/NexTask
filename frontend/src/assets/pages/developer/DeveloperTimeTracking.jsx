@@ -14,7 +14,7 @@ export default function DeveloperTimeTracking() {
   const load = () => {
     if (!taskId || isNaN(taskId)) return
     setLoading(true)
-    axios.get(`http://localhost:3001/developer/tasks/${taskId}/time`, {
+    axios.get(`${import.meta.env.VITE_API_URL}/developer/tasks/${taskId}/time`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(res => setEntries(res.data))
@@ -24,7 +24,7 @@ export default function DeveloperTimeTracking() {
 
   // start timer
   const start = () => {
-    axios.post(`http://localhost:3001/developer/tasks/${taskId}/time`,
+    axios.post(`${import.meta.env.VITE_API_URL}/developer/tasks/${taskId}/time`,
       { action: 'start' },
       { headers: { Authorization: `Bearer ${token}` } }
     )
@@ -34,7 +34,7 @@ export default function DeveloperTimeTracking() {
 
   // stop timer
   const stop = () => {
-    axios.post(`http://localhost:3001/developer/tasks/${taskId}/time`,
+    axios.post(`${import.meta.env.VITE_API_URL}/developer/tasks/${taskId}/time`,
       { action: 'stop' },
       { headers: { Authorization: `Bearer ${token}` } }
     )
@@ -45,7 +45,7 @@ export default function DeveloperTimeTracking() {
   // clear all entries
   const clearAll = () => {
     if (!window.confirm('Erase all time entries for this task?')) return
-    axios.delete(`http://localhost:3001/developer/tasks/${taskId}/time`, {
+    axios.delete(`${import.meta.env.VITE_API_URL}/developer/tasks/${taskId}/time`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(load)
@@ -107,3 +107,6 @@ export default function DeveloperTimeTracking() {
     </div>
   )
 }
+
+
+

@@ -13,7 +13,7 @@ export default function ClientTimeTracking() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    axios.get(`http://localhost:3001/client/projects/${projectId}/timetracking`, {
+    axios.get(`${import.meta.env.VITE_API_URL}/client/projects/${projectId}/timetracking`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => {
@@ -50,3 +50,6 @@ export default function ClientTimeTracking() {
     </div>
   );
 }
+
+
+

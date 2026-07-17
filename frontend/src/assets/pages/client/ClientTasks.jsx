@@ -20,7 +20,7 @@ export default function ClientTasks() {
       return;
     }
 
-    axios.get(`http://localhost:3001/client/projects/${projectId}/tasks`, {
+    axios.get(`${import.meta.env.VITE_API_URL}/client/projects/${projectId}/tasks`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(res => {
@@ -74,3 +74,6 @@ export default function ClientTasks() {
     </div>
   );
 }
+
+
+

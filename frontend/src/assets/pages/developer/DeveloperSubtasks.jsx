@@ -13,7 +13,7 @@ export default function DeveloperSubtasks() {
 
   const loadSubs = () => {
     axios
-      .get(`http://localhost:3001/developer/tasks/${taskId}/subtasks`, {
+      .get(`${import.meta.env.VITE_API_URL}/developer/tasks/${taskId}/subtasks`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setSubs(res.data))
@@ -38,7 +38,7 @@ export default function DeveloperSubtasks() {
   const saveStatus = () => {
     axios
       .put(
-        `http://localhost:3001/developer/subtasks/${editStatus.subtask_id}`,
+        `${import.meta.env.VITE_API_URL}/developer/subtasks/${editStatus.subtask_id}`,
         { status: editStatus.newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -117,3 +117,6 @@ export default function DeveloperSubtasks() {
     </div>
   );
 }
+
+
+

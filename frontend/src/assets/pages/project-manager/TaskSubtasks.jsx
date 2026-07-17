@@ -18,7 +18,7 @@ export default function TaskSubtasks() {
 
   const fetchSubtasks = async () => {
     try {
-      const res = await axios.get(`http://localhost:3001/pm/tasks/${taskId}/subtasks`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/pm/tasks/${taskId}/subtasks`);
       setSubtasks(res.data);
       setLoading(false);
     } catch (err) {
@@ -31,7 +31,7 @@ export default function TaskSubtasks() {
   const handleDeleteSubtask = async (subtaskId) => {
     if (!window.confirm("Are you sure you want to delete this subtask?")) return;
     try {
-      await axios.delete(`http://localhost:3001/pm/subtasks/${subtaskId}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/pm/subtasks/${subtaskId}`);
       setSubtasks((prev) => prev.filter((subtask) => subtask.subtask_id !== subtaskId));
     } catch (err) {
       console.error("Error deleting subtask:", err);
@@ -65,3 +65,6 @@ export default function TaskSubtasks() {
     </div>
   );
 }
+
+
+

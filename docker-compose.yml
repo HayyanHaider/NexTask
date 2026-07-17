@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  # 1. SQL Server Database
+  database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: nextask-sql
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=${DB_PASSWORD}  # <-- Reads from root .env
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q 'SELECT 1'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  db-initializer:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    depends_on:
+      database:
+        condition: service_healthy
+    entrypoint: >
+      /bin/bash -c "
+      /opt/mssql-tools18/bin/sqlcmd -S database -U sa -P '${DB_PASSWORD}' -C -Q 'IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = \"DB_PHASE4\") CREATE DATABASE DB_PHASE4;'
+      "
+
+  # 2. Node Express Backend
+  backend:
+    build: ./backend
+    container_name: nextask-backend
+    ports:
+      - "${PORT}:${PORT}"                 # <-- Reads from root .env
+    # This automatically passes ALL variables from your root .env directly into the backend container!
+    env_file:
+      - .env
+    depends_on:
+      database:
+        condition: service_healthy
+
+  # 3. React Frontend
+  frontend:
+    build: ./frontend
+    container_name: nextask-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - WDS_SOCKET_PORT=0
+    depends_on:
+      - backend
+
+volumes:
+  mssql_data:

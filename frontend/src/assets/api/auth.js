@@ -1,7 +1,7 @@
 // /src/api/auth.js
 import axios from "axios";
 
-const API_URL = "http://localhost:3001/auth";
+const API_URL = `${import.meta.env.VITE_API_URL}/auth`;
 
 export async function login(email, password) {
   try {
@@ -25,3 +25,6 @@ export async function register(username, email, password, role_id) {
     throw error.response?.data?.message || "Registration failed";
   }
 }
+
+
+

@@ -15,7 +15,7 @@ export default function ClientAttachments() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     axios
-      .get(`http://localhost:3001/client/projects/${projectId}/attachments`, {
+      .get(`${import.meta.env.VITE_API_URL}/client/projects/${projectId}/attachments`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(res => {
@@ -50,3 +50,6 @@ export default function ClientAttachments() {
     </div>
   );
 }
+
+
+

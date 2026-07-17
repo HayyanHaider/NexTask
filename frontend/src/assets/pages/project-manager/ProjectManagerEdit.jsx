@@ -15,7 +15,7 @@ export default function ProjectManagerEdit() {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `http://localhost:3001/pm/projects/${projectId}`,
+          `${import.meta.env.VITE_API_URL}/pm/projects/${projectId}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const { name, description } = response.data;
@@ -35,7 +35,7 @@ export default function ProjectManagerEdit() {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://localhost:3001/pm/projects/${projectId}`,
+        `${import.meta.env.VITE_API_URL}/pm/projects/${projectId}`,
         form,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -97,3 +97,6 @@ export default function ProjectManagerEdit() {
     </div>
   );
 }
+
+
+

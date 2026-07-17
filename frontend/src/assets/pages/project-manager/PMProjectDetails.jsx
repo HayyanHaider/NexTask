@@ -31,7 +31,7 @@ export default function PMProjectDetails() {
   const loadDetails = () => {
     setLoading(true);
     axios
-      .get(`http://localhost:3001/pm/projects/${projectId}/details`, {
+      .get(`${import.meta.env.VITE_API_URL}/pm/projects/${projectId}/details`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(res => {
@@ -47,7 +47,7 @@ export default function PMProjectDetails() {
 
   const loadDevelopers = () => {
     axios
-      .get('http://localhost:3001/admin/users', {
+      .get(`${import.meta.env.VITE_API_URL}/admin/users`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(res => {
@@ -71,7 +71,7 @@ export default function PMProjectDetails() {
 
     try {
       await axios.post(
-        `http://localhost:3001/pm/projects/${projectId}/tasks`,
+        `${import.meta.env.VITE_API_URL}/pm/projects/${projectId}/tasks`,
         {
           title: newTaskTitle,
           description: newTaskDesc,
@@ -99,7 +99,7 @@ export default function PMProjectDetails() {
 
     try {
       await axios.put(
-        `http://localhost:3001/pm/tasks/${taskId}`,
+        `${import.meta.env.VITE_API_URL}/pm/tasks/${taskId}`,
         {
           title: editTaskData.title,
           description: editTaskData.description,
@@ -123,7 +123,7 @@ export default function PMProjectDetails() {
     if (!title.trim()) return alert('Enter a subtask title');
     try {
       await axios.post(
-        `http://localhost:3001/pm/tasks/${taskId}/subtasks`,
+        `${import.meta.env.VITE_API_URL}/pm/tasks/${taskId}/subtasks`,
         { title, status: 'Pending' },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -140,7 +140,7 @@ export default function PMProjectDetails() {
     e.preventDefault();
     try {
       await axios.put(
-        `http://localhost:3001/pm/subtasks/${subtaskId}`,
+        `${import.meta.env.VITE_API_URL}/pm/subtasks/${subtaskId}`,
         { title: editSubtaskTitle, status: editSubtaskStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -155,7 +155,7 @@ export default function PMProjectDetails() {
   const handleDeleteTask = async taskId => {
     if (!window.confirm(`Delete task #${taskId}?`)) return;
     try {
-      await axios.delete(`http://localhost:3001/pm/tasks/${taskId}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/pm/tasks/${taskId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       loadDetails();
@@ -168,7 +168,7 @@ export default function PMProjectDetails() {
   const handleDeleteSubtask = async (taskId, subId) => {
     if (!window.confirm(`Delete subtask #${subId}?`)) return;
     try {
-      await axios.delete(`http://localhost:3001/pm/subtasks/${subId}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/pm/subtasks/${subId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       loadDetails();
@@ -414,3 +414,6 @@ export default function PMProjectDetails() {
     </div>
   );
 }
+
+
+

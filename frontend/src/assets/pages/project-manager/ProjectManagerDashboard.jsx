@@ -10,7 +10,7 @@ export default function ProjectManagerDashboard() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    axios.get("http://localhost:3001/pm/projects", {
+    axios.get(`${import.meta.env.VITE_API_URL}/pm/projects`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(res => setProjects(res.data))
@@ -63,7 +63,7 @@ export default function ProjectManagerDashboard() {
                     try {
                       const token = localStorage.getItem("token");
                       await axios.delete(
-                        `http://localhost:3001/pm/projects/${proj.project_id}`,
+                        `${import.meta.env.VITE_API_URL}/pm/projects/${proj.project_id}`,
                         { headers: { Authorization: `Bearer ${token}` }
                       });
                       setProjects(p => p.filter(x => x.project_id !== proj.project_id));
@@ -88,3 +88,6 @@ export default function ProjectManagerDashboard() {
     </div>
   );
 }
+
+
+

@@ -17,7 +17,7 @@ export default function DeveloperTaskDetails() {
   useEffect(() => {
     const token = localStorage.getItem('token');
 
-    axios.get(`http://localhost:3001/developer/tasks/${taskId}`, {
+    axios.get(`${import.meta.env.VITE_API_URL}/developer/tasks/${taskId}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(res => {
@@ -66,3 +66,6 @@ export default function DeveloperTaskDetails() {
     </div>
   );
 }
+
+
+

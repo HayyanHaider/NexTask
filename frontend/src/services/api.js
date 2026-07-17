@@ -1,5 +1,5 @@
 // /frontend/src/services/api.js
-const BASE_URL = "http://localhost:3001";    // ← backend port
+const BASE_URL = `${import.meta.env.VITE_API_URL}`;    // ← backend port
 
 // Auth functions
 export async function registerUser(userData) {
@@ -122,3 +122,6 @@ export async function deleteTaskPermission(permissionData) {
   if (!res.ok) throw new Error((await res.json()).error || res.statusText);
   return res.json();
 }
+
+
+

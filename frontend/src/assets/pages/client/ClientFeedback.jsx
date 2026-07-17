@@ -20,7 +20,7 @@ export default function ClientFeedback() {
     }
     
     axios
-      .post(`http://localhost:3001/client/feedback`,
+      .post(`${import.meta.env.VITE_API_URL}/client/feedback`,
         { feedback_text: text, rating, project_id: projectId },
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -81,3 +81,6 @@ export default function ClientFeedback() {
     </div>
   );
 }
+
+
+

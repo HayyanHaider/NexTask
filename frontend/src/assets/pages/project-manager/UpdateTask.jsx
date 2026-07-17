@@ -25,7 +25,7 @@ export default function UpdateTask() {
 
   const fetchTaskDetails = async () => {
     try {
-      const res = await axios.get(`http://localhost:3001/pm/tasks/${taskId}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/pm/tasks/${taskId}`);
       setTaskData(res.data);
       setLoading(false);
     } catch (err) {
@@ -37,7 +37,7 @@ export default function UpdateTask() {
 
   const fetchDevelopers = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/pm/developers");
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/pm/developers`);
       setDevelopers(res.data);
     } catch (err) {
       console.error(err);
@@ -51,7 +51,7 @@ export default function UpdateTask() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3001/pm/tasks/${taskId}`, taskData);
+      await axios.put(`${import.meta.env.VITE_API_URL}/pm/tasks/${taskId}`, taskData);
       alert("Task updated successfully!");
       navigate(`/pm/projects/${taskData.project_id}/tasks`);
     } catch (err) {
@@ -137,3 +137,6 @@ export default function UpdateTask() {
     </div>
   );
 }
+
+
+

@@ -22,9 +22,9 @@ export default function AdminAssignTask() {
 
   useEffect(() => {
     Promise.all([
-      fetch("http://localhost:3001/admin/projects"),
-      fetch("http://localhost:3001/admin/tasks"),
-      fetch("http://localhost:3001/admin/users"),
+      fetch(`${import.meta.env.VITE_API_URL}/admin/projects`),
+      fetch(`${import.meta.env.VITE_API_URL}/admin/tasks`),
+      fetch(`${import.meta.env.VITE_API_URL}/admin/users`),
     ])
       .then(async ([pRes, tRes, uRes]) => {
         const [pData, tData, uData] = await Promise.all([
@@ -52,7 +52,7 @@ export default function AdminAssignTask() {
     }
     try {
       const res = await fetch(
-        `http://localhost:3001/admin/tasks/${selectedTask}/assign`,
+        `${import.meta.env.VITE_API_URL}/admin/tasks/${selectedTask}/assign`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -153,3 +153,6 @@ export default function AdminAssignTask() {
     </div>
   );
 }
+
+
+

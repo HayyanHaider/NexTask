@@ -15,7 +15,7 @@ export default function DeveloperDashboard() {
   const loadTasks = () => {
     setLoading(true);
     axios
-      .get('http://localhost:3001/developer/tasks', {
+      .get(`${import.meta.env.VITE_API_URL}/developer/tasks`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(res => {
@@ -48,7 +48,7 @@ export default function DeveloperDashboard() {
 
     try {
       await axios.put(
-        `http://localhost:3001/developer/tasks/${taskId}/status`,
+        `${import.meta.env.VITE_API_URL}/developer/tasks/${taskId}/status`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -117,3 +117,6 @@ export default function DeveloperDashboard() {
     </div>
   );
 }
+
+
+

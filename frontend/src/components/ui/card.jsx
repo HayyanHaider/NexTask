@@ -10,3 +10,5 @@ export function Card({ children, className }) {
     return <div className="text-sm text-gray-600">{children}</div>;
   }
   
+
+

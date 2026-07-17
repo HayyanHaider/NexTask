@@ -18,9 +18,9 @@ const AdminDashboard = () => {
     try {
       setLoading(true);
       const [u, p, t] = await Promise.all([
-        axios.get("http://localhost:3001/admin/users"),
-        axios.get("http://localhost:3001/admin/projects"),
-        axios.get("http://localhost:3001/admin/tasks"),
+        axios.get(`${import.meta.env.VITE_API_URL}/admin/users`),
+        axios.get(`${import.meta.env.VITE_API_URL}/admin/projects`),
+        axios.get(`${import.meta.env.VITE_API_URL}/admin/tasks`),
       ]);
       setUsers(u.data);
       setProjects(p.data);
@@ -79,3 +79,6 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+
+
+
